@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          th:href="@{/lib/bootstrap/dist/css/bootstrap.min.css}" />
+    <link rel="stylesheet" href="../../static/css/app.css" th:href="@{/css/app.css}"/>
+    <title>All flights</title>
+</head>
+<body>
+<div class="col-2">
+    <a href="/flightreservation" type="button" class="btn" style="background-color: #ffe8a1; margin-top: 20px;">Home</a>
+    <a th:href="@{/showAllFlights}" type="button" class="btn" style="background-color: #ffe8a1; margin-top: 20px">All Flights</a>
+</div>
+<div class="container">
+    <div class="body-box">
+        <h2 class="box-heading">All Flights</h2>
+        <br>
+        <div class="flightTable">
+            <table class="table">
+                <thead>
+                <td>Airlines</td>
+                <td>Departure City</td>
+                <td>Arrival City</td>
+                <td>Departure Date</td>
+                </thead>
+                <tbody >
+                <tr th:each="flight : ${flights}">
+                    <td th:text="${flight.operatingAirlines}"></td>
+                    <td th:text="${flight.departureCity}"></td>
+                    <td th:text="${flight.arrivalCity}"></td>
+                    <td th:text="${flight.estimatedDepartureTime}"></td>
+                    <td>
+
+
+
+                        <form th:action="@{/{id}/deleteFlight(id=${flight.getId()})}" th:method="delete">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+</div>
+<script th:src="@{/lib/jquery/dist/jquery.min.js}"></script>
+</body>
+</html>
